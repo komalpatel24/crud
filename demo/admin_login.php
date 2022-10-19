@@ -1,4 +1,3 @@
- 
 
 <?php
 session_start();
@@ -17,7 +16,6 @@ if (!$tblQuery) {
     }
 }
 
-
 if (isset($_POST['submit'])) {
     
     $uname = $_POST['userName'];
@@ -25,14 +23,11 @@ if (isset($_POST['submit'])) {
     
     $fetch_array = mysqli_fetch_assoc($tblQuery);
     
-    if ($uname == $fetch_array['userName'] && $pass == $fetch_array['password']  ) {
+    if ($uname == $fetch_array['userName'] && $pass == $fetch_array['password']) {
         $_SESSION['aid'] = $fetch_array['id'];
         setcookie('aid',$fetch_array['id'],time() + 300,'/');
         header('location:dashboard.php');
-        
     }
-      
- 
 }
  
 function setValue($value)
@@ -41,13 +36,11 @@ function setValue($value)
         echo $_POST[$value];
     }
 }
-
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -60,42 +53,22 @@ function setValue($value)
 <?php include 'navbar.php'; ?>
 
     <div class="container bg-light col-lg-3">
-
         <form method="post">
             <h1 class="text-center">Log in</h1>
-
-
-
 
             <div class="form-group">
                 <label for="" class="">User Name</label>
                 <input class="form-control" type="text" name="userName" value="<?php setValue('userName'); ?>">
             </div>
 
-
             <div class="form-group">
                 <label for="">Password</label>
                 <input class="form-control" type="text" name="password" value="<?php setValue('password'); ?>">
             </div>
 
-
-
-
-
-
-
             <input type="submit" name="submit" value='Log in' class="btn btn-primary">
-            
-
-
-
-
-
-
         </form>
-
     </div>
 
 </body>
-
 </html>

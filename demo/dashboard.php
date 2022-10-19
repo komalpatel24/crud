@@ -11,9 +11,9 @@ if (!isset($_SESSION['aid'])) {
 }
 
 $id=  $_SESSION['aid'];
-$findAdmnTbl = "SELECT * FROM admin WHERE id = $id";
-$rslt = mysqli_query($conn, $findAdmnTbl);
-$admnArr  = mysqli_fetch_assoc($rslt);
+$findAdminTbl = "SELECT * FROM admin WHERE id = $id";
+$rslt = mysqli_query($conn, $findAdminTbl);
+$adminArr  = mysqli_fetch_assoc($rslt);
 
 
 $selectTable = "SELECT * FROM user";
@@ -42,18 +42,15 @@ if (!$result) {
 <body>
 <?php include 'navbar.php'; ?>
 
-    <h1>Hello Admin <span class="text-primary"> <?php echo $admnArr['userName']; ?> </span>, Welcome!!!</h1>
-<a href="admin_logout.php" class="btn btn-danger">Log out</a>
-<a href="addUser.php" class="btn btn-primary">Add Employee</a>
+    <h1>Hello Admin <span class="text-primary"> <?php echo $adminArr['userName']; ?> </span>, Welcome!!!</h1>
+    <a href="admin_logout.php" class="btn btn-danger">Log out</a>
+    <a href="addUser.php" class="btn btn-primary">Add Employee</a>
 
-
-    
     <table class="table text-center">
         <thead>
             <tr>
-
                 <th class="table-primary" >Id</th>
-                <th class="table-light" >Fisrt_Name</th>
+                <th class="table-light" >First_Name</th>
                 <th class="table-light" >Last_Name</th>
                 <th  class="table-light">Age</th>
                 <th class="table-light" >Gender</th>
@@ -71,12 +68,9 @@ if (!$result) {
 
         <tbody>
             <?php while ($myData = mysqli_fetch_assoc($result)) {
-                if($myData['salary']>10000){
-
-                
+                // if($myData['salary']>10000){
                 ?>
                 <tr>
-
                     <td class="table-primary" > <?php echo $myData['id']; ?> </td>
                     <td class="table-light" ><?php echo $myData['firstName']; ?> </td>
                     <td class="table-light" ><?php echo $myData['lastName']; ?> </td>
@@ -88,16 +82,14 @@ if (!$result) {
                     <td class="table-light" ><?php echo $myData['email']; ?> </td>
                     <td class="table-light" ><?php echo base64_decode($myData['password']); ?> </td>
                     <td class="table-light" ><?php echo $myData['hobby']; ?> </td>
-                    <td class="table-light" > <img src="<?php echo $myData['photo']; ?>" alt="Network Error" hright='100px' width='100px'> </td>
+                    <td class="table-light" > <img src="<?php echo $myData['photo']; ?>" alt="Network Error" height='100px' width='100px'> </td>
                     <td class="table-warning" ><a href="update.php?upld_id=<?php echo $myData['id']; ?>"><button class="btn btn-warning" >Update</button></a></td>
                     <td class="table-danger" ><a href="delete.php?del_id=<?php echo $myData['id']; ?>"><button class="btn btn-danger" >DELETE</button></a></td>
                 </tr>
-            <?php} } ?>
+               <?php 
+            //   } 
+             } ?>
         </tbody>
-
-
-
     </table>
 </body>
-
 </html>
