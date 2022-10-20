@@ -138,20 +138,15 @@
      confirm_password varchar(100) not null,
      hobby text not null,
      photo varchar(100) not null
- 
-  
     )";
  
          if (!mysqli_query($conn, $createTable)) {
              echo mysqli_error($conn);
          }
      }
- 
- 
    
      $email = $_POST['email'];
      $pass = $_POST['password'];
- 
      
      $selectEmail = "SELECT * FROM user WHERE email = '$email' ";
      $query = mysqli_query($conn, $selectEmail);

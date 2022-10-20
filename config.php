@@ -1,15 +1,20 @@
 <?php
- //connection to the databse,,,
- $servername = "localhost";
- $username = "root";
- $password = "";
- $database = "mydb";
+
+$conn = mysqli_connect('localhost', 'root', '');
+
+
  
- // Create connection
- $conn = new mysqli($servername, $username, $password, $database);
- 
- // Check connection
- if ($conn->connect_error) {
-   die("Connection failed: " . $conn->connect_error);
- }
- ?>
+if ($conn) { 
+    if (!mysqli_select_db($conn,'test')) {
+        $createDB = "CREATE DATABASE test";  
+        if(mysqli_query($conn,$createDB)){
+            mysqli_select_db($conn,"test");
+        }
+    }
+
+}else{
+    echo mysqli_connect_error();
+    
+}
+
+?>
