@@ -9,7 +9,8 @@ include 'config.php';
         $tblQuery = mysqli_query($conn,$selectTable);
 
         if (!$tblQuery) {
-            $createTable = "CREATE TABLE  admin ( id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, userName varchar(100) NOT NULL, password varchar(100) NOT NULL )";
+            $createTable = "CREATE TABLE  admin ( id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+                                                 userName varchar(100) NOT NULL, password varchar(100) NOT NULL )";
             if(!mysqli_query($conn,$createTable)){
             echo mysqli_error($conn); 
             }
@@ -34,7 +35,7 @@ include 'config.php';
                 $passwordErr = 'Password should contain at least one digit';
             } elseif (strlen($password) != 8) {
                 $passwordErr = 'Password should be 8 characters';
-
+            }else{ 
                 $insertQuery = "INSERT INTO `admin` (`userName`,`password`) VALUES ('$userName','$password')";
                 if (!mysqli_query($conn, $insertQuery)) {
                         echo mysqli_error($conn);
@@ -50,15 +51,37 @@ include 'config.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/./bootstrap-4.6.1-dist/./css/./bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="./assets/./bootstrap-4.6.1-dist/./css/./bootstrap.min.css"> -->
     <title>Admin_Login</title>
+    <style>
+        
+    .error {
+      color: #FF0000;
+    }
+    body{
+      background-image: url("a1.jpg");
+      height: 60vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    box-sizing: border-box;
+      
+    }
+    .container{
+        background-color: rgba(0, 0, 0, 0.8);
+        margin-top:10%;
+    }
+    
+  </style>
 </head>
 
 <body>
+    
 
-    <div class="container bg-light col-lg-3">
-        <form method="post">
-            <h1 class="text-center">Login</h1>
+<div class="container  border border-light text-white"> 
+        <form method="post" >
+            <h1 class="text-center p-3">Login</h1>
 
             <div class="form-group">
                 <label for="" class="">UserName : </label>
@@ -72,9 +95,9 @@ include 'config.php';
                 <small> * <?php echo $passwordErr; ?> </small>
             </div>
 
-            <input type="submit" name="submit" value='submit' class="btn btn-primary">
+            <input type="submit" name="submit" value='submit' class="btn btn-primary mb-3">
         </form>
-    </div>
+</div>
 
 </body>
 </html>

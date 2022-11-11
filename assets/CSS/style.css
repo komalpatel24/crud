@@ -1,0 +1,153 @@
+html,
+body {
+    width: 100%;
+}
+
+
+/* home page css */
+
+.main {
+    margin-top: 6%;
+}
+
+.home-bg {
+    background-image: url();
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.background {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    border-radius: 10px;
+}
+
+
+/* navbar css */
+
+nav {
+    /* background-color: black; */
+}
+
+
+
+/* user related css */
+
+.user-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/./Virtual-Workshop-1.jpg);
+   
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* .user_welcome {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/./welcome-greeting-message.png);
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.userData {
+    width: fit-content;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.user-info {
+    float: right;
+    margin-top: 66px;
+}
+
+.user-data img {
+    border: 2px solid whitesmoke;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#showPass {
+    color: rgb(255, 255, 255);
+    position: absolute;
+    cursor: pointer;
+    margin: 10px 0 0 90px;
+}
+
+#userPassword {
+    background: none;
+    color: white;
+    cursor: pointer;
+} */
+
+
+/* admin related css */
+
+/* .admin_welcome {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/./shutterstock_1231981675.jpg);
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.admin-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/./man-having-a-conference-call-with-his-business-team-online-vector-id1218524083.jpg);
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.login-bg {
+    background-image: url(../image/./103738404-certificado-seguro-de-smartphone-concepto-de-autenticación-de-dos-identidades-verificar-la-solicitud.jpg);
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+} */
+
+
+/* utilities classes */
+
+/* .wel_msg_bg {
+    width: fit-content;
+    border-radius: 10px;
+    color: aliceblue;
+    text-align: center;
+    margin-top: 12%;
+}
+
+.login-form-bg {
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 15px;
+}
+
+.showPassword {
+    float: right;
+} */
+
+
+/* login css */
+
+/* .login-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/./1543613757886.jpg);
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+} */
+
+
+/* error css */
+
+small {
+    color: red;
+}
