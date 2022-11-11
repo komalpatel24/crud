@@ -5,7 +5,7 @@ include 'config.php';
 $fNameErr = $lNameErr  = $ageErr = $genErr = $depErr = $dojErr = $salaryErr = $emailErr = $passwordErr = $cPasswordErr = $hobbyErr = $fileErr = '';
 
 # insert data through user
-if (isset($_POST['submit'])) {
+
 
     $selectTable = "SELECT * FROM user";
 
@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
      id int(10) AUTO_INCREMENT not null primary key,
      firstName varchar(10) not null,
      lastName varchar(10) not null,
-     age text  ,
+     age text(10) not null,
      gender text not null,
      department text not null,
      date_of_join date not null,
@@ -28,115 +28,109 @@ if (isset($_POST['submit'])) {
             echo mysqli_error($conn);
         }
     }
-
-    $email = $_POST['email'];
-    $password= $_POST['password'];
-
-    // $selectEmail = "SELECT * FROM user WHERE email = '$email' ";
-    // $result = mysqli_query($conn, $selectEmail);
-    // $email_exist = mysqli_num_rows($result);
-    // $img_extension = ['jpg','jpeg','png','JPG','JPEG','PNG'];
-
-    if (empty($_POST['fName'])) {
-        $fNameErr = 'first name should be not empty';
-    } elseif (!preg_match("/^[a-zA-Z]*$/", $_POST['fName'])) {
-        $fNameErr = 'only enter alphabet ';
-    } elseif (empty($_POST['lName'])) {
-        $lNameErr = 'last name should be not empty ';
-    } elseif (!preg_match("/^[a-zA-Z]*$/", $_POST['lName'])) {
-        $lNameErr = 'only enter alphabet ';
-    } elseif (empty($_POST['age'])) {
-        $ageErr = 'age should be not empty ';
-    } elseif (!preg_match("/\d/", $_POST['age'])) {
-        $ageErr = 'age must be in digit';
-    } elseif ($_POST['age'] < 18) {
-        $ageErr = 'age should not be less than 18 ';
-    } elseif (empty($_POST['gender'])) {
-        $genErr = 'gender should be not empty';
-    } elseif (empty($_POST['department'])) {
-        $depErr = 'please choose your department';
-    } elseif (empty($_POST['doj'])) {
-        $dojErr = 'when did you join this company?';
-    } elseif ($_POST['doj'] > date('Y-m-d')) {
-        $dojErr = 'invalid date';
-    } elseif (empty($_POST['salary'])) {
-        $salaryErr = 'enter your  salary ';
-    } elseif (!preg_match("/\d/", $_POST['salary'])) {
-        $salaryErr = 'salary must be in digit';
-    } elseif ($_POST['salary'] < 1) {
-        $salaryErr = 'salary should not be less than 1 ';
-    } elseif (!preg_match("/\d/", $_POST['salary'])) {
-        $salaryErr = 'salary must be in digit';
-    } elseif (empty($_POST['email'])) {
-        $emailErr = 'email should be not empty';
-    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $emailErr = 'email invalid';
-    } elseif ($email_exist) {
-        $emailErr = 'this email is already registered';
-    } elseif (empty($password)) {
-        $passwordErr = 'Password should be not empty';
-    } elseif (!preg_match("/[A-Z]/", $password)) {
-        $passwordErr = 'Password should contain at least one Capital Letter';
-    } elseif (!preg_match("/[a-z]/", $password)) {
-        $passwordErr = 'Password should contain at least one small Letter';
-    } elseif (!preg_match("/\d/", $password)) {
-        $passwordErr = 'Password should contain at least one digit';
-    } elseif (!preg_match("/\W/", $password)) {
-        $passwordErr = 'Password should contain at least one special character';
-    } elseif (strlen($password) < 8) {
-        $passwordErr = 'Password should be 8 characters';
-    } elseif (empty($_POST['cPassword'])) {
-        $cPasswordErr = 'enter your confirm password';
-    } elseif ($_POST['cPassword'] != $password) {
-        $cPasswordErr = 'password and confirm password are not match';
-    } elseif (empty($_POST['hobby'])) {
-        $hobbyErr = 'hobby should be not empty';
-    } elseif (!file_exists($_FILES["file"]["tmp_name"])) {
-        $fileErr = 'Choose image file to upload ';
-    } elseif (!in_array(pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION),$img_extension)) {
-        $fileErr = 'Choose file only in JPG, JPEG and PNG format';
-    } elseif ($_FILES["file"]["size"] > 1000000) {
-        $fileErr = 'image size should be less than 1 MB';
-    } else {
-        $firstName = $_POST['fName'];
-        $lastName = $_POST['lName'];
-        $age = $_POST['age'];
-        $gender = $_POST['gender'];
-        $department = $_POST['department'];
-        $dateOfJoin = $_POST['doj'];
+    
+    if (isset($_POST['submit'])) {
         $email = $_POST['email'];
-        $password = base64_encode($_POST['password']);
-        $salary = $_POST['salary'];
-        $hobby = $_POST['hobby'];
 
-        $ArrToString = implode(", ", $hobby);
+        $selectEmail = "SELECT * FROM user WHERE email = '$email' ";
+        $result = mysqli_query($conn, $selectEmail);
+        $email_exist = mysqli_num_rows($result);
+        $img_extension = ['jpg','jpeg','png','JPG','JPEG','PNG'];
 
-        $target_dir = "assets/pics/";
+            if (empty($_POST['fName'])) {
+                $fNameErr = 'first name should be not empty';
+            } elseif (!preg_match("/^[a-zA-Z]*$/", $_POST['fName'])) {
+                $fNameErr = 'only enter alphabet';
+            } elseif (empty($_POST['lName'])) {
+                $lNameErr = 'last name should be not empty';
+            } elseif (!preg_match("/^[a-zA-Z]*$/", $_POST['lName'])) {
+                $lNameErr = 'only enter alphabet';
+            } elseif (empty($_POST['age'])) {
+                $ageErr = 'age should be not empty';
+            } elseif (!preg_match("/\d/", $_POST['age'])) {
+                $ageErr = 'age must be in digit';
+            } elseif ($_POST['age'] < 18) {
+                $ageErr = 'age should not be less than 18';
+            } elseif (empty($_POST['gender'])) {
+                $genErr = 'gender should be not empty';
+            } elseif (empty($_POST['department'])) {
+                $depErr = 'please choose your department';
+            } elseif (empty($_POST['doj'])) {
+                $dojErr = 'when did you join this company?';
+            } elseif ($_POST['doj'] > date('D-M-Y')) {
+                $dojErr = 'invalid date';
+            } elseif (empty($_POST['salary'])) {
+                $salaryErr = 'enter your  salary ';
+            } elseif (!preg_match("/\d/", $_POST['salary'])) {
+                $salaryErr = 'salary must be in digit';
+            } elseif ($_POST['salary'] < 1) {
+                $salaryErr = 'salary should not be less than 1';
+            } elseif (!preg_match("/\d/", $_POST['salary'])) {
+                $salaryErr = 'salary must be in digit';
+            } elseif (empty($_POST['email'])) {
+                $emailErr = 'email should be not empty';
+            } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                $emailErr = 'email invalid';
+            } elseif ($email_exist) {
+                $emailErr = 'this email is already registered';
+            } elseif (empty($password)) {
+                $passwordErr = 'Password should be not empty';
+            } elseif (!preg_match("/[A-Z]/", $password)) {
+                $passwordErr = 'Password should contain at least one Capital Letter';
+            } elseif (!preg_match("/[a-z]/", $password)) {
+                $passwordErr = 'Password should contain at least one small Letter';
+            } elseif (!preg_match("/\d/", $password)) {
+                $passwordErr = 'Password should contain at least one digit';
+            } elseif (!preg_match("/\W/", $password)) {
+                $passwordErr = 'Password should contain at least one special character';
+            } elseif (strlen($password) < 8) {
+                $passwordErr = 'Password should be 8 characters';
+            } elseif (empty($_POST['cPassword'])) {
+                $cPasswordErr = 'enter your confirm password';
+            } elseif ($_POST['cPassword'] != $password) {
+                $cPasswordErr = 'password and confirm password are not match';
+            } elseif (empty($_POST['hobby'])) {
+                $hobbyErr = 'hobby should be not empty';
+            } elseif (!file_exists($_FILES["file"]["tmp_name"])) {
+                $fileErr = 'Choose image file to upload ';
+            } elseif (!in_array(pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION),$img_extension)) {
+                $fileErr = 'Choose file only in JPG, JPEG and PNG format';
+            } elseif ($_FILES["file"]["size"] > 1000000) {
+                $fileErr = 'image size should be less than 1 MB';
+            } else {
+                $firstName = $_POST['fName'];
+                $lastName = $_POST['lName'];
+                $age = $_POST['age'];
+                $gender = $_POST['gender'];
+                $department = $_POST['department'];
+                $dateOfJoin = $_POST['doj'];
+                $email = $_POST['email'];
+                $password = base64_encode($_POST['password']);
+                $salary = $_POST['salary'];
+                $hobby = $_POST['hobby'];
 
-        $imagePath = $target_dir . basename($_FILES['file']['name']);
+                $ArrToString = implode(", ", $hobby);
 
-        $movefile = move_uploaded_file($_FILES['file']['tmp_name'], $imagePath);
+                $target_dir = "assets/pics/";
 
-        $insertQuery = "INSERT INTO user (`firstName`,`lastName`,`age`,`gender`,`department`,`date_of_join`,`salary`,`email`,`password`, `hobby`,`photo`) VALUES ('$firstName','$lastName','$age','$gender','$department ','$dateOfJoin','$salary ','$email','$password','$ArrToString','$imagePath')";
-        if (mysqli_query($conn, $insertQuery) && $movefile) {
-             ?>
-   <script>
-       alert('You are successfully registerd!!');
-       location.replace('login.php');
-   </script>
-             <?php 
+                $imagePath = $target_dir . basename($_FILES['file']['name']);
 
-        } else {
-            echo mysqli_error($conn);
+                $movefile = move_uploaded_file($_FILES['file']['tmp_name'], $imagePath);
+                $insertQuery = "INSERT INTO `user` (`firstName`,`lastName`,`age`,`gender`,`department`,`date_of_join`,`salary`,`email`,`password`, `hobby`,`photo`) VALUES ('$firstName','$lastName','$age','$gender','$department ','$dateOfJoin','$salary ','$email','$password','$ArrToString','$imagePath')";
+                if (mysqli_query($conn, $insertQuery) && $movefile) {
+                    ?>
+            <script>
+                alert('You are successfully registerd!!');
+                location.replace('login.php');
+            </script>
+                    <?php 
+
+                } else {
+                    echo mysqli_error($conn);
+                }
+             }
         }
-    }
-}
-
-
-
-
-
-?>
+            ?>
 
 
 
@@ -153,7 +147,7 @@ if (isset($_POST['submit'])) {
     <title>Register</title>
     <style>
         .user-bg {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./assets/image/r1.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(./assets/image/r1.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -164,16 +158,14 @@ if (isset($_POST['submit'])) {
     </style>
 </head>
 
-
-
 <body class="user-bg">
     <!-- navbar -->
    <?php include 'navbar.php';?>
 
     <!-- register form -->
-    <div class="container mt-5 mb-5 text-white border border-light">
+    <div class="container mt-5 mb-5 text-white">
         <form method="post" enctype="multipart/form-data">
-            <h1 class="text-center">Register</h1>
+            <h1 class="text-center mt-3 mb-3">Register</h1>
 
             <div class="row">
 
@@ -211,7 +203,7 @@ if (isset($_POST['submit'])) {
                     </label>
 
                     <div class="form-ckeck">
-                        <label for="department">Department 
+                        <label for="department">Department  </label>
                             <select name="department" class="form-control" id="department">
                                 <option value="" selected disabled>---Choose Department</option>
                                 <option value="R & D">R & D</option>
@@ -220,7 +212,7 @@ if (isset($_POST['submit'])) {
                                 <option value="HR">HR</option>
                             </select>
                             <small> * <?php echo $depErr;  ?> </small>
-                            </label>
+                           
                     </div>
 
                     <div class="form-group">
@@ -241,8 +233,8 @@ if (isset($_POST['submit'])) {
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label for="">Email</label> 
-                        <input type="text" class="form-control" name="email" value="">
+                        <label for="">E-mail</label> 
+                        <input type="text" class="form-control" name="email">
                         <small> * <?php echo $emailErr;  ?> </small>
                     </div>
 
@@ -258,7 +250,7 @@ if (isset($_POST['submit'])) {
                         <small> * <?php echo $cPasswordErr;  ?> </small>
                     </div>
                 
-                    <div class="form-check showPassword justify-content-end">
+                    <div class="form-check showPassword justify-content-end" style="margin-left: 70%;">
                         <input type="checkbox" class="form-check-input" id="showPassword">
                         <label for="showPassword" class="form-check-label">show password</label>
                     </div>
@@ -311,7 +303,6 @@ if (isset($_POST['submit'])) {
     </form>
     </div>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script> -->
-    <script src="Assets/JS/signup_pass.js"></script>
 
 
 </body>

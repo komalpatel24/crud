@@ -69,7 +69,7 @@ include 'config.php';
       
     }
     .container{
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.5);
         margin-top:10%;
     }
     
@@ -79,7 +79,7 @@ include 'config.php';
 <body>
     
 
-<div class="container  border border-light text-white"> 
+<div class="container  text-white"> 
         <form method="post" >
             <h1 class="text-center p-3">Login</h1>
 
