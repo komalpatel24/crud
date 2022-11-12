@@ -5,8 +5,7 @@ include 'config.php';
 $fNameErr = $lNameErr  = $ageErr = $genErr = $depErr = $dojErr = $salaryErr = $emailErr = $passwordErr = $cPasswordErr = $hobbyErr = $fileErr = '';
 
 # insert data through user
-
-
+if (isset($_POST['submit'])) {
     $selectTable = "SELECT * FROM user";
 
     if (!mysqli_query($conn, $selectTable)) {
@@ -28,13 +27,13 @@ $fNameErr = $lNameErr  = $ageErr = $genErr = $depErr = $dojErr = $salaryErr = $e
             echo mysqli_error($conn);
         }
     }
-    
-    if (isset($_POST['submit'])) {
+        
         $email = $_POST['email'];
+        $password= $_POST['password'];
 
-        $selectEmail = "SELECT * FROM user WHERE email = '$email' ";
-        $result = mysqli_query($conn, $selectEmail);
-        $email_exist = mysqli_num_rows($result);
+        // $selectEmail = "SELECT * FROM user WHERE email = '$email' ";
+        // $result = mysqli_query($conn, $selectEmail);
+        // $email_exist = mysqli_num_rows($result);
         $img_extension = ['jpg','jpeg','png','JPG','JPEG','PNG'];
 
             if (empty($_POST['fName'])) {
@@ -71,8 +70,8 @@ $fNameErr = $lNameErr  = $ageErr = $genErr = $depErr = $dojErr = $salaryErr = $e
                 $emailErr = 'email should be not empty';
             } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 $emailErr = 'email invalid';
-            } elseif ($email_exist) {
-                $emailErr = 'this email is already registered';
+            // } elseif ($email_exist) {
+            //     $emailErr = 'this email is already registered';
             } elseif (empty($password)) {
                 $passwordErr = 'Password should be not empty';
             } elseif (!preg_match("/[A-Z]/", $password)) {
@@ -250,7 +249,7 @@ $fNameErr = $lNameErr  = $ageErr = $genErr = $depErr = $dojErr = $salaryErr = $e
                         <small> * <?php echo $cPasswordErr;  ?> </small>
                     </div>
                 
-                    <div class="form-check showPassword justify-content-end" style="margin-left: 70%;">
+                    <div class="form-check showPassword " style="margin-left: 70%;">
                         <input type="checkbox" class="form-check-input" id="showPassword">
                         <label for="showPassword" class="form-check-label">show password</label>
                     </div>
@@ -303,7 +302,7 @@ $fNameErr = $lNameErr  = $ageErr = $genErr = $depErr = $dojErr = $salaryErr = $e
     </form>
     </div>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script> -->
-
+    <script src="Assets/JS/signup_pass.js"></script>
 
 </body>
 
