@@ -79,13 +79,17 @@ include 'config.php';
     }
     .container{
         background-color: rgba(0, 0, 0, 0.7);
-        margin-top:7%;
+        margin-top:3%;
+    }
+    .navbar{
+        background-color: gray;
     }
     
   </style>
 </head>
 
 <body>
+<?php include 'navbar.php'; ?>
     
 
 <div class="container border border-light text-white mx-auto row w-50"> 
