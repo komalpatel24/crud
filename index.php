@@ -48,7 +48,7 @@
                 <a href="login.php"><img src="./assets/image/Admin.png" class="card-img-top" alt="..."></a>
                 <div class="card-body">
                     <h5 class="card-title">ADMIN</h5>
-                    <a href="login.php" class="btn btn-dark border-light">Click here</a>
+                    <a href="admin_login.php" class="btn btn-dark border-light">Click here</a>
                 </div>
             </div>
         </div>

@@ -3,10 +3,10 @@
 include 'config.php';
 
 $fNameErr = $lNameErr  = $ageErr = $genErr = $depErr = $dojErr = $salaryErr = $emailErr = $passwordErr = $cPasswordErr = $hobbyErr = $fileErr = '';
-
+$selectTable = "SELECT * FROM user";
 # insert data through user
 if (isset($_POST['submit'])) {
-    $selectTable = "SELECT * FROM user";
+   
 
     if (!mysqli_query($conn, $selectTable)) {
         $createTable = "CREATE TABLE user (
@@ -31,9 +31,10 @@ if (isset($_POST['submit'])) {
         $email = $_POST['email'];
         $password= $_POST['password'];
 
-        // $selectEmail = "SELECT * FROM user WHERE email = '$email' ";
-        // $result = mysqli_query($conn, $selectEmail);
-        // $email_exist = mysqli_num_rows($result);
+        $selectEmail = "SELECT * FROM user WHERE email = '$email' ";
+        $result = mysqli_query($conn, $selectEmail);
+        $email_exist = mysqli_num_rows($result);
+
         $img_extension = ['jpg','jpeg','png','JPG','JPEG','PNG'];
 
             if (empty($_POST['fName'])) {
@@ -66,12 +67,14 @@ if (isset($_POST['submit'])) {
                 $salaryErr = 'salary should not be less than 1';
             } elseif (!preg_match("/\d/", $_POST['salary'])) {
                 $salaryErr = 'salary must be in digit';
+
             } elseif (empty($_POST['email'])) {
                 $emailErr = 'email should be not empty';
             } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 $emailErr = 'email invalid';
-            // } elseif ($email_exist) {
-            //     $emailErr = 'this email is already registered';
+            } elseif ($email_exist) {
+                $emailErr = 'this email is already registered';
+                
             } elseif (empty($password)) {
                 $passwordErr = 'Password should be not empty';
             } elseif (!preg_match("/[A-Z]/", $password)) {
@@ -146,7 +149,7 @@ if (isset($_POST['submit'])) {
     <title>Register</title>
     <style>
         .user-bg {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(./assets/image/r1.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(./assets/image/r1.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -171,19 +174,25 @@ if (isset($_POST['submit'])) {
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="" class="">First Name</label> 
-                        <input class="form-control" type="text" name="fName">
+                        <input class="form-control" type="text" name="fName" 
+                                    value="<?php if (isset($_POST['fName'])) {
+                                         echo $fName = $_POST['fName'];} ?>">
                         <small> * <?php echo $fNameErr; ?> </small>
                     </div>
 
                     <div class="form-group">
                         <label for="">Last Name</label> 
-                        <input class="form-control" type="text" name="lName">
+                        <input class="form-control" type="text" name="lName"
+                                    value="<?php if (isset($_POST['lName'])) {
+                                         echo $lName = $_POST['lName'];} ?>">
                         <small>* <?php echo $lNameErr; ?> </small>
                     </div>
 
                     <div class="form-group">
                         <label for="">Age</label> 
-                        <input type="text" class="form-control" name="age">
+                        <input type="text" class="form-control" name="age"
+                                        value="<?php if (isset($_POST['age'])) {
+                                             echo $age = $_POST['age'];} ?>">
                         <small>* <?php echo $ageErr; ?> </small>
                     </div>
 
@@ -191,12 +200,18 @@ if (isset($_POST['submit'])) {
                         <small> * <?php echo $genErr; ?> </small>
                         <div class="form-check">
                             <label for="" class="form-check-label">
-                                <input type="radio" value="male" class="form-check-input" name="gender"> male
+                                <input type="radio" class="form-check-input" name="gender"
+                                        value="male" <?php if (isset($_POST['gender'])) {
+                                                 if ($_POST['gender'] == 'male')
+                                                            echo 'checked';} ?>> male
                             </label>
                         </div>
                         <div class="form-check">
                             <label for="" class="form-check-label">
-                                <input type="radio" value="female" class="form-check-input" name="gender"> female
+                                <input type="radio" class="form-check-input" name="gender"
+                                         value="female" <?php if (isset($_POST['gender'])) {
+                                                 if ($_POST['gender'] == 'female')
+                                                        echo 'checked';} ?>> female
                             </label>
                         </div>
                     </label>
@@ -205,10 +220,18 @@ if (isset($_POST['submit'])) {
                         <label for="department">Department  </label>
                             <select name="department" class="form-control" id="department">
                                 <option value="" selected disabled>---Choose Department</option>
-                                <option value="R & D">R & D</option>
-                                <option value="Sales">Sales</option>
-                                <option value="Marketing">Marketing</option>
-                                <option value="HR">HR</option>
+                                <option value="R & D" <?php if (isset($_POST['department'])) {
+                                                    if ($_POST['department'] == 'R & D')
+                                                        echo 'selected';} ?>>R & D</option>
+                                <option value="Sales"<?php if (isset($_POST['department'])) {
+                                                    if ($_POST['department'] == 'Sales')
+                                                        echo 'selected';} ?>>Sales</option>
+                                <option value="Marketing" <?php if (isset($_POST['department'])) {
+                                                    if ($_POST['department'] == 'Marketing')
+                                                        echo 'selected';} ?>>Marketing</option>
+                                <option value="HR" <?php if (isset($_POST['department'])) {
+                                                    if ($_POST['department'] == 'HR')
+                                                        echo 'selected';} ?>>HR</option>
                             </select>
                             <small> * <?php echo $depErr;  ?> </small>
                            
@@ -216,13 +239,17 @@ if (isset($_POST['submit'])) {
 
                     <div class="form-group">
                         <label for="">Date Of Join</label>
-                        <input type="date" class="form-control" name="doj">
+                        <input type="date" class="form-control" name="doj"
+                                value="<?php if (isset($_POST['doj'])) {
+                                         echo $doj = $_POST['doj'];} ?>">
                         <small> * <?php echo $dojErr; ?> </small>
                     </div>
 
                     <div class="form-group">
                         <label for="">Salary</label> 
-                        <input type="text" class="form-control" name="salary">
+                        <input type="text" class="form-control" name="salary"
+                                    value="<?php if (isset($_POST['salary'])) {
+                                            echo $salary = $_POST['salary'];} ?>">
                         <small> * <?php echo $salaryErr;  ?> </small>
                     </div>
 
@@ -233,19 +260,25 @@ if (isset($_POST['submit'])) {
 
                     <div class="form-group">
                         <label for="">E-mail</label> 
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" name="email"
+                                value="<?php if (isset($_POST['email'])) {
+                                          echo $email = $_POST['email'];} ?>">
                         <small> * <?php echo $emailErr;  ?> </small>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" name="password" id="password">
+                        <input type="password" class="form-control" name="password" id="password"
+                                            value="<?php if (isset($_POST['password'])) {
+                                                        echo $password = $_POST['password'];} ?>">
                         <small> * <?php echo $passwordErr;  ?> </small>
                     </div>
 
                     <div class="form-group">
                         <label for="cPassword">Confirm Password</label> 
-                        <input type="password" class="form-control" name="cPassword" id="cPassword">
+                        <input type="password" class="form-control" name="cPassword" id="cPassword"
+                                         value="<?php if (isset($_POST['cPassword'])) {
+                                                echo $cPassword = $_POST['cPassword'];} ?>">
                         <small> * <?php echo $cPasswordErr;  ?> </small>
                     </div>
                 
@@ -259,22 +292,30 @@ if (isset($_POST['submit'])) {
                         <small> * <?php echo $hobbyErr;  ?> </small>
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="hobby[]" id="" value="reading">
+                            <input type="checkbox" class="form-check-input" name="hobby[]" id="" value="reading"
+                                         <?php if (isset($_POST['hobby']) && in_array('reading', $_POST['hobby'])) {
+                                                         echo 'checked';} ?>>
                             <label for="hobby" class="form-check-label">reading</label>
                         </div>
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="hobby[]" id="" value="dancing">
+                            <input type="checkbox" class="form-check-input" name="hobby[]" id="" value="dancing"
+                                         <?php if (isset($_POST['hobby']) && in_array('dancing', $_POST['hobby'])) {
+                                                         echo 'checked';} ?>>
                             <label for="hobby" class="form-check-label">Dancing</label>
                         </div>
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="hobby[]" id="" value="programming">
+                            <input type="checkbox" class="form-check-input" name="hobby[]" id="" value="programming"
+                                             <?php if (isset($_POST['hobby']) && in_array('programming', $_POST['hobby'])) {
+                                                        echo 'checked'; } ?>>
                             <label for="hobby" class="form-check-label">Programming</label>
                         </div>
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="hobby[]" id="" value="gaming">
+                            <input type="checkbox" class="form-check-input" name="hobby[]" id="" value="gaming"
+                                                <?php if (isset($_POST['hobby']) && in_array('gaming', $_POST['hobby'])) {
+                                                            echo 'checked';} ?>>
                             <label for="hobby" class="form-check-label">Gaming</label>
                         </div>
 
@@ -293,7 +334,7 @@ if (isset($_POST['submit'])) {
                     <div class="a1 mt-3 mb-3  text-center bg-light" >
                         <p class="text-danger">already have an account?</p>
                         <a href="login.php"> click here</a>
-                </div>
+                    </div>
 
                 </div>
 

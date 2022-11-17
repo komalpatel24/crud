@@ -29,7 +29,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="user_login.php">As User</a>
-                        <a class="dropdown-item" href="login.php">As Admin </a>
+                        <a class="dropdown-item" href="admin_login.php">As Admin </a>
                     </div>
                 </li>
             </ul>
