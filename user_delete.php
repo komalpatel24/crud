@@ -8,7 +8,7 @@ $deleteQuery = "DELETE  FROM  user WHERE id=$id";
 
 if(mysqli_query($conn,$deleteQuery)){
     echo "<script> alert('Record Deleted') 
-    window.location.href='dashboard.php';
+    window.location.href='user_logout.php';
     </script>";
 }
 ?>

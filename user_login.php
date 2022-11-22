@@ -1,52 +1,84 @@
-
 <?php
-
 include 'config.php';
 
-    $emailErr = $passwordErr = '';
+// if (isset($_SESSION['id'])) {
+//     header('location: user_dashboard.php');
+// }
 
-        $selectTable = "SELECT * FROM `user_login` ";
-        $tblQuery = mysqli_query($conn,$selectTable);
 
-        if (!$tblQuery) {
-            $createTable = "CREATE TABLE  user_login ( id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-                                                 email varchar(100) NOT NULL, password varchar(100) NOT NULL )";
-            if(!mysqli_query($conn,$createTable)){
-            echo mysqli_error($conn); 
-            }
-        }
+        // $selectTable = "SELECT * FROM `user_login` ";
+        // $tblQuery = mysqli_query($conn,$selectTable);
 
+        // if (!$tblQuery) {
+        //     $createTable = "CREATE TABLE  user_login ( id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+        //                                          email varchar(100) NOT NULL, password varchar(100) NOT NULL )";
+        //     if(!mysqli_query($conn,$createTable)){
+        //     echo mysqli_error($conn); 
+        //     }
+        // }
+        $emailErr = $passwordErr = '';
         if (isset($_POST['submit'])) {
             
-            $email = $_POST['email'];
-            $password = $_POST['password'];
+        //     $email = $_POST['email'];
+        //     $password = $_POST['password'];
 
-            $selectEmail = "SELECT * FROM user WHERE email = '$email' ";
-            $result = mysqli_query($conn, $selectEmail);
-            $email_exist = mysqli_num_rows($result);
+        //     $selectEmail = "SELECT * FROM user WHERE email = '$email' ";
+        //     $result = mysqli_query($conn, $selectEmail);
+        //     $email_exist = mysqli_num_rows($result);
             
-            if (empty($_POST['email'])) {
-                $emailErr = 'email should be not empty';
-            } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                $emailErr = 'email invalid';
-            } elseif ($email_exist) {
-                $emailErr = 'this email not registered';
+        //     if (empty($_POST['email'])) {
+        //         $emailErr = 'email should be not empty';
+        //     } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        //         $emailErr = 'email invalid';
+        //     } elseif ($email_exist) {
+        //         $emailErr = 'this email not registered';
 
-            } elseif (empty($pass)) {
-                $passwordErr = "password required";
+        //     } elseif (empty($pass)) {
+        //         $passwordErr = "password required";
             
-                $insertQuery = "INSERT INTO `user_login` (`email`,`password`) VALUES ('$email','$password')";
-                if (!mysqli_query($conn, $insertQuery)) {
-                    ?>
-            <script>
-                alert('You are successfully login!!');
-                location.replace('index.php');
-            </script>
-        <?php
-                }else{ 
-                        echo mysqli_error($conn);
+        //         $insertQuery = "INSERT INTO `user_login` (`email`,`password`) VALUES ('$email','$password')";
+        //         if (!mysqli_query($conn, $insertQuery)) {
+        //             ?>
+        //     <script>
+        //         alert('You are successfully login!!');
+        //         location.replace('a1.jpg');
+        //     </script>
+        // <?php
+        //         }else{ 
+        //                 echo mysqli_error($conn);
+        //         }
+        //     }
+        $email = $_POST['email'];
+        $pass = $_POST['password'];
+    
+        if (empty($email)) {
+            $emailErr = " email required";
+        } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "invalid email";
+        } elseif (empty($pass)) {
+            $passwordErr = "password required";
+        } else {
+            $selectTable = "SELECT * FROM user WHERE email ='$email'";
+            $query = mysqli_query($conn, $selectTable);
+            $check_email = mysqli_num_rows($query);
+            $assoc = mysqli_fetch_assoc($query);
+            if ($check_email) {
+    
+                if ($assoc['password'] == base64_encode($pass)) {
+                    $_SESSION['id'] = $assoc['id'];
+                     header('location:user_dashboard.php');
+                } else {
+                    $passwordErr = "invalid password";
                 }
+            } else {
+                $emailErr = "u are not ragisterd";
+            // <script>
+            //     alert('You are not registerd!!');
+            //     location.replace('user_registration.php');
+            // </script>
+            
             }
+        }
         }
   function setValue($value)
     {

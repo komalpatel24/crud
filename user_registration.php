@@ -1,7 +1,8 @@
-
 <?php
 include 'config.php';
-
+// if (isset($_SESSION['id'])) {
+//     header('location:user_dashboard.php');
+// }
 $fNameErr = $lNameErr  = $ageErr = $genErr = $depErr = $dojErr = $salaryErr = $emailErr = $passwordErr = $cPasswordErr = $hobbyErr = $fileErr = '';
 $selectTable = "SELECT * FROM user";
 # insert data through user
@@ -107,7 +108,8 @@ if (isset($_POST['submit'])) {
                 $department = $_POST['department'];
                 $dateOfJoin = $_POST['doj'];
                 $email = $_POST['email'];
-                $password = base64_encode($_POST['password']);
+                // $password = base64_encode($_POST['password']);
+                $password = $_POST['password'];
                 $salary = $_POST['salary'];
                 $hobby = $_POST['hobby'];
 
@@ -123,7 +125,7 @@ if (isset($_POST['submit'])) {
                     ?>
             <script>
                 alert('You are successfully registerd!!');
-                location.replace('login.php');
+                location.replace('user_login.php');
             </script>
                     <?php 
 
