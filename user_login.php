@@ -1,9 +1,9 @@
 <?php
 include 'config.php';
 
-// if (isset($_SESSION['id'])) {
-//     header('location: user_dashboard.php');
-// }
+if (isset($_SESSION['id'])) {
+    header('location: user_dashboard.php');
+}
 
 
         // $selectTable = "SELECT * FROM `user_login` ";
@@ -104,7 +104,7 @@ include 'config.php';
       color: red;
     }
     body{
-      background-image: url("a1.jpg");
+      background-image: url("./assets/image/a1.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       box-sizing: border-box;

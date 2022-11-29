@@ -53,6 +53,7 @@ if (!isset($_SESSION['id'])) {
             background-repeat: no-repeat;
             background-size: cover;
             box-sizing: border-box;
+            width: 100%;
         }
         table{
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));

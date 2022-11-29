@@ -68,7 +68,7 @@ function setValue($value)
           color:red;
         }
         body{
-          background-image: url("al.jpg");
+          background-image: url("./assets/image/al.jpg");
           background-repeat: no-repeat;
           background-size: cover;
           box-sizing: border-box;
