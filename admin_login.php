@@ -67,15 +67,23 @@ function setValue($value)
         small {
           color:red;
         }
-        body{
-          background-image: url("./assets/image/al.jpg");
-          background-repeat: no-repeat;
+        .login-bg{
+          /* background-image: url("./assets/image/al.jpg"); */
+          background-color: #dde1e7;
+          /* background-repeat: no-repeat;
           background-size: cover;
-          box-sizing: border-box;
+          box-sizing: border-box; */
         }
         .container{
-            background-color: rgba(0, 0,0, 0.7);
-            margin-top:7%;
+            /* background-color: rgba(0, 0,0, 0.7); */
+            background-color: #dde1e7;
+            margin-top:5%;
+            border-radius: 7px;
+            box-shadow: -3px -3px 7px #ffffff73 , 3px 3px 5px rgba(94 ,104,121, .288);
+        }
+        .container::after{
+            box-shadow:inset -3px -3px 7px #ffffff73 , 3px 3px 5px rgba(94 ,104,121, .288);
+
         }
         
       </style>
@@ -87,7 +95,7 @@ function setValue($value)
     <?php include 'navbar.php'; ?>
     <div class="black">
 
-  <div class="container  text-light mx-auto row w-50"> 
+  <div class="container  text-dark mx-auto row w-50"> 
       <div class="col-lg-12 mb-4">
 
         <form method="post">

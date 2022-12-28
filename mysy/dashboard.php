@@ -1,7 +1,7 @@
 <?php
     include 'config.php';
 
-    $selectTable = "SELECT * FROM user";
+    $selectTable = "SELECT * FROM user_register";
     $result = mysqli_query($conn, $selectTable);
     $assoc = mysqli_fetch_assoc($result);
 ?>
@@ -13,31 +13,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/bootstrap-4.6.1-dist/css/bootstrap.min.css">
-    <!-- <link href="https://cdn.jsdelivr.net   /npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="assets/CSS/style.css">
+    <!-- <link rel="stylesheet" href="assets/bootstrap-4.6.1-dist/css/bootstrap.min.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="assets/CSS/style.css"> -->
     <title>Dashboard</title>
 </head>
 
 <body>
-    <?php include 'navbar.php';?>
+   
     <!--  show data of users  -->
     <div class="table-responsive">
         <table class="table text-center">
-            <thead class="thead-dark">
+            <thead class="bg-dark">
                 <tr>
-                    <th class="table-light">Id</th>
-                    <th class="table-light">Fisrt Name</th>
-                    <th class="table-light">Last Name</th>
-                    <th class="table-light">Age</th>
-                    <th class="table-light">Gender</th>
-                    <th class="table-light">Department</th>
-                    <th class="table-light">Date Of Join</th>
-                    <th class="table-light">Salary</th>
-                    <th class="table-light">Email</th>
-                    <th class="table-light">Password</th>
-                    <th class="table-light">Hobbies</th>
-                    <th class="table-light">Photos</th>
+                    <th class="table-light">id</th>
+                    <th class="table-light">after</th>
+                    <th class="table-light">board</th>
+                    <th class="table-light">stream</th>
+                    <th class="table-light">year</th>
+                    <th class="table-light">ayear</th>
+                    <th class="table-light">enumber</th>
+                    <th class="table-light">name</th>
+                    <th class="table-light">password</th>
+                    <th class="table-light">cpassword</th>
+                    <th class="table-light">number</th>
                     <th class="table-warning">Edit</th>
                     <th class="table-danger">Delete</th>
 
@@ -52,18 +51,18 @@
                 while ($myData = mysqli_fetch_assoc($result)) { ?>
                     <tr id="row<?php echo $myData['id']; ?>">
                         <td class="table-light"> <?php echo $myData['id']; ?> </td>
-                        <td class="table-light"><?php echo $myData['firstName']; ?> </td>
-                        <td class="table-light"><?php echo $myData['lastName']; ?> </td>
-                        <td class="table-light"><?php echo $myData['age']; ?> </td>
-                        <td class="table-light"><?php echo $myData['gender']; ?> </td>
-                        <td class="table-light"><?php echo $myData['department']; ?> </td>
-                        <td class="table-light"><?php echo $myData['date_of_join']; ?> </td>
-                        <td class="table-light"><?php echo $myData['salary']; ?> </td>
-                        <td class="table-light"><?php echo $myData['email']; ?> </td>
+                        <td class="table-light"><?php echo $myData['after']; ?> </td>
+                        <td class="table-light"><?php echo $myData['board']; ?> </td>
+                        <td class="table-light"><?php echo $myData['stream']; ?> </td>
+                        <td class="table-light"><?php echo $myData['year']; ?> </td>
+                        <td class="table-light"><?php echo $myData['ayear']; ?> </td>
+                        <td class="table-light"><?php echo $myData['enumber']; ?> </td>
+                        <td class="table-light"><?php echo $myData['name']; ?> </td>
                         <!-- <td class="table-light"><?php echo base64_decode($myData['password']); ?> </td> -->
                         <td class="table-light"><?php echo $myData['password']; ?> </td>
-                        <td class="table-light"><?php echo $myData['hobby']; ?> </td>
-                        <td class="table-light"> <img src="<?php echo $myData['photo']; ?>" alt="Network Error" hright='100px' width='100px'> </td>
+                        <td class="table-light"><?php echo $myData['cpassword']; ?> </td>
+                        <td class="table-light"><?php echo $myData['number']; ?> </td>
+
                         <td class="table-warning"><a href="update.php?update_id=<?php echo $myData['id']; ?>"><button class="btn btn-warning">Update</button></a></td>
                         <td class="table-danger" ><a href="delete.php?del_id=<?php echo $myData['id']; ?>"><button class="btn btn-danger" >DELETE</button></a></td>
                     </tr>

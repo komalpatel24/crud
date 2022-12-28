@@ -64,7 +64,7 @@ if (isset($_SESSION['id'])) {
             $assoc = mysqli_fetch_assoc($query);
             if ($check_email) {
     
-                if ($assoc['password'] == base64_encode($pass)) {
+                if ($assoc['password'] == ($pass)) {
                     $_SESSION['id'] = $assoc['id'];
                      header('location:user_dashboard.php');
                 } else {

@@ -11,25 +11,26 @@ if (!isset($_SESSION['id'])) {
     $check_email = mysqli_num_rows($query);
     $row = mysqli_fetch_assoc($query);
 
- $id=$firstName=$lastName=$age=$gender=$department=$dateofjoin=$email=$pass=$hobby=$salary=$photo="";
+//  $id=$firstName=$lastName=$age=$gender=$department=$date_of_join=$email=$pass=$hobby=$salary=$photo="";
 //  error_reporting (E_ALL ^ E_NOTICE);
     // error_reporting(0); 
-  if ($row > 0) {
+//   if ($row > 0) {
     
-        $id = $row['id'];
-        $firstName = $row['firstName'];
-        $lastName = $row['lastName'];
-        $age = $row['age'];
-        $gender = $row['gender'];
-        $department = $row['department'];
-        $dateofjoin = $row['dateofjoin'];
-        $email = $row['email'];
-        $pass = base64_decode($row['password']);
-        $hobby = $row['hobby'];
-        $salary = $row['salary'];
+//         $id = $row['id'];
+//         $firstName = $row['firstName'];
+//         $lastName = $row['lastName'];
+//         $age = $row['age'];
+//         $gender = $row['gender'];
+//         $department = $row['department'];
+//         $date_of_join = $row['date_of_join'];
+//         $email = $row['email'];
+//         // $pass = base64_decode($row['password']);
+//         $pass = $row['password'];
+//         $hobby = $row['hobby'];
+//         $salary = $row['salary'];
        
-        $photo = $row['photo'];
-    }
+//         $photo = $row['photo'];
+//     }
     $user_welcome = "Helloo " . $row['firstName'] . ", Welcome!!" ;
 ?>
 
@@ -48,16 +49,15 @@ if (!isset($_SESSION['id'])) {
             margin: 0px;
             padding: 0px;
         }
-              .m1{
+              body{
             background-image:   linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),url(./assets/image/d2.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             box-sizing: border-box;
             width: 100%;
+            height: 100vh;
         }
-        table{
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-        }
+      
         nav{
             background-color: white;
         }
@@ -78,24 +78,24 @@ if (!isset($_SESSION['id'])) {
                 <div class="d-flex user-data">
                     <img src="<?php echo $row['photo']; ?>"  alt="Network Error" width='50px' height='50px' data-toggle="modal" data-target="#exampleModal">
                      <!-- Modal -->
-                <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog user-info">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2><?php echo $row['firstName']; ?></h2>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <a  class="btn btn-primary" href="userData.php">Show Details</a>
-                            </div>
-                            <div class="modal-body">
-                                <h2><a href="user_logout.php" class="btn btn-danger">Log out</a></h2>
+                    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog user-info">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2><?php echo $row['firstName']; ?></h2>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <a  class="btn btn-primary" href="user_detail.php">Show Details</a>
+                                </div>
+                                <div class="modal-body">
+                                    <h2><a href="user_logout.php" class="btn btn-danger">Log out</a></h2>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                     <!-- modal finished -->
                 </div>
                 </li>
@@ -108,9 +108,17 @@ if (!isset($_SESSION['id'])) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
   <div class="m1">
-        <h1 class="text-light p-5" style="text-align:center;"> <?php echo $user_welcome; ?> </h1> 
+        <h1 class="text-light p-5 mt-5 " style="text-align:center;"> <b><?php echo $user_welcome; ?> </b></h1> 
+        <h3 class="m-5 text-justify text-center text-light"> Full Stack Web Development is the most popular job profile and highly paid in the market. 
+            In this course, you will master skills like Python, MEAN stack, NodeJS, MongoDB(NoSQL), Python Django, NodeJS, ReactJS, 
+            Quality & Performance, DevOps, etc. This Full Stack Web Development certification by E&ICT, 
+            IIT Guwahati & Intellipaat is created with an objective to provide high-end skills</h3>
 
-        <h2 class="text-light" style="text-align:center;">UserData</h2> <br>
+
+
+
+
+        <!-- <h2 class="text-light" style="text-align:center;">UserData</h2> <br>
 
         <div class="row justify-content-center ">
                    <table class="table  text-light w-50 table-bordered table-hover">
@@ -142,7 +150,7 @@ if (!isset($_SESSION['id'])) {
                     </tr>
                     <tr>
                         <td>DOJ</td>
-                        <td><?php echo $dateofjoin; ?></td>
+                        <td><?php echo $date_of_join; ?></td>
                     </tr>
                     <tr>
                         <td>EMAIL</td>
@@ -173,8 +181,8 @@ if (!isset($_SESSION['id'])) {
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
+        
+    </div>-->
     </div>
 </body>
 </html>

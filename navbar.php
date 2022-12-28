@@ -18,7 +18,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse h4 justify-content-end" style="margin-right:50px;" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse h4 justify-content-end"  id="navbarSupportedContent">
             <ul class="navbar-nav justify-content-end" id="n1" >
                 <li class="nav-item active">
                     <a class="nav-link " href="index.php">Home <span class="sr-only">(current)</span></a>
