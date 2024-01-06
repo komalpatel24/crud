@@ -1,10 +1,14 @@
 <?php
 include 'config.php';
+// session_start();
 
 if (!isset($_SESSION['id'])) {
     header('location:user_login.php');
 }
 
+if (!isset($_SESSION['id'])) {
+    $_SESSION['id'] = $_COOKIE['id'];
+}
 
 
 # get id by logged user's id
@@ -15,7 +19,37 @@ $query = mysqli_query($conn, $select_data);
 $fetch_array = mysqli_fetch_assoc($query);
 $strToArr = explode(', ', $fetch_array['hobby']);
 
-echo $fetch_array['department'];
+// echo $fetch_array['department'];
+
+function value($col_name, $name)
+{
+    global $fetch_array;
+    if (!isset($_POST['submit'])) {
+        echo $fetch_array[$col_name];
+    } else {
+        echo $_POST[$name];
+    }
+}
+
+function passwordValue($col_name, $name)
+{
+    global $fetch_array;
+    if (!isset($_POST['submit'])) {
+        echo base64_decode($fetch_array[$col_name]);
+    } else {
+        echo $_POST[$name];
+    }
+}
+
+function cPasswordValue($col_name)
+{
+    global $fetch_array;
+    if (!isset($_POST['submit'])) {
+        echo base64_decode($fetch_array[$col_name]);
+    } else {
+        echo $_POST['cPassword'];
+    }
+}
 
 function arrChecked($value, $show)
 {
@@ -257,15 +291,20 @@ if (isset($_POST['submit'])) {
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" name="password" id="password" value="<?php echo base64_decode($fetch_array['password']); ?>">
+                        <input type="password" class="form-control" name="password" id="apassword" value="<?php echo $fetch_array['password']; ?>">
                         <small class="red"><?php echo $passwordErr; ?></small>
                     </div>
 
                    
-                    <div class="form-check showPassword">
+                    <div class="form-check showPassword" style="margin-left: 70%;">
+                 <input type="checkbox" class="form-check-input" id="asignInPass">
+                 <label for="asignInPass" class="form-check-label">show password</label>
+           </div>
+
+                    <!-- <div class="form-check showPassword">
                         <input type="checkbox" class="form-check-input" id="showPassword">
                         <label for="showPassword" class="form-check-label">show password</label>
-                    </div>
+                    </div> -->
 
                     <label for=""> Hobby
                         <small class="red"><?php echo $hobbyErr; ?></small>
@@ -312,7 +351,7 @@ if (isset($_POST['submit'])) {
         </form>
     </div>
 
-
+    <script src="Assets/JS/asignin_pass.js"></script>
     <script src="assets/JS/signup_pass.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>

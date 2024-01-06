@@ -136,7 +136,7 @@ if (!isset($_SESSION['id'])) {
             <tr>
                 <td>OPERATIOS</td>
                 <td> 
-                    <!-- <button class="bg-dark p-2 ml-2"><a class="text-warning" href="user_update.php?upd_id=<?php echo $id;?>">Edit</a></button> -->
+                    <button class="bg-dark p-2 ml-2"><a class="text-warning" href="user_update.php?upd_id=<?php echo $id;?>">Edit</a></button>
                     <button class="bg-dark p-2 ml-3"><a class="text-Danger"  href="user_delete.php?del_id=<?php echo $id;?>">Delete</a></button>
                 </td>
             </tr>
